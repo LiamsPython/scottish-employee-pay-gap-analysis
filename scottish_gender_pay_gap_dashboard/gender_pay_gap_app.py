@@ -77,7 +77,7 @@ st.markdown(f"""
 
 # ------------------- Constants -------------------
 
-CSV_PATH = "UK_Gender_Pay_Gap_Data_2023_to_2024.csv"
+CSV_PATH = "scottish_gender_pay_gap_dashboard/UK_Gender_Pay_Gap_Data_2023_to_2024.csv"
 SCOTTISH_CITIES = [
     'Edinburgh', 'Glasgow', 'Aberdeen', 'Dundee', 'Inverness',
     'Perth', 'Stirling', 'Falkirk', 'Ayrshire', 'Highlands'
