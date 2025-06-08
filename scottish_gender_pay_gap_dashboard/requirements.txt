@@ -1,6 +1,0 @@
-streamlit
-pandas
-matplotlib
-seaborn
-
-run command in terminal: streamlit run gender_pay_gap_app.py
