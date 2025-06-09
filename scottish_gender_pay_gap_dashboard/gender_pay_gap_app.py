@@ -272,7 +272,7 @@ st.success(f"Loaded data for **{len(df_cleaned)}** Scottish employers.")
 with st.expander("Show Raw Filtered Data"):
     st.dataframe(df_cleaned)
 
-with st.expander("ℹData Summary"):
+with st.expander("Data Summary"):
     st.write(df_cleaned.describe())
 
 plot_summary_metrics(df_cleaned)
