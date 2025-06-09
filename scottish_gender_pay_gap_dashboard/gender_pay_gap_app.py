@@ -110,6 +110,7 @@ def load_and_clean_data(path):
     return df_cleaned
 
 # ------------------- Charts -------------------
+
 def plot_summary_metrics(df):
     col1, col2 = st.columns(2)
     with col1:
@@ -117,19 +118,24 @@ def plot_summary_metrics(df):
     with col2:
         st.metric("**Average Mean Pay Gap**", f"{df['DiffMeanHourlyPercent'].mean():.2f}%")
 
+
 def plot_median_pay_gap_bar(df):
     st.markdown(
-    "<h3 style='text-align: center; font-size: 32px; color: #FFFFFF;'>Median Gender Pay Gap by Employer</h3>",
-    unsafe_allow_html=True)
+        "<h3 style='text-align: center; font-size: 28px; color: #FFFFFF;'>Median Gender Pay Gap by Employer</h3>",
+        unsafe_allow_html=True
+    )
 
     max_display = st.slider("Select number of employers to display:", 5, min(100, len(df)), 20, 5)
     df_sorted = df.sort_values(by='DiffMedianHourlyPercent', ascending=False).head(max_display)
-    fig, ax = plt.subplots(figsize=(10, 0.4 * max_display))
+
+    fig, ax = plt.subplots(figsize=(8, 0.35 * max_display))
     sns.barplot(x='DiffMedianHourlyPercent', y='EmployerName', data=df_sorted, palette='coolwarm', ax=ax)
-    ax.set_xlabel("Median Pay Gap (%)")
-    ax.set_ylabel("Employer")
-    ax.set_title(f"Top {max_display} Organisations by Median Gender Pay Gap")
+    ax.set_xlabel("Median Pay Gap (%)", fontsize=10)
+    ax.set_ylabel("Employer", fontsize=10)
+    ax.set_title(f"Top {max_display} Organisations by Median Gender Pay Gap", fontsize=12)
+    plt.tight_layout()
     st.pyplot(fig)
+
     st.markdown("""
 **Interpretation:**  
 This bar chart displays the top employers in Scotland ranked by their **median gender pay gap**. A higher percentage indicates that, on average, women earn significantly less than men at that company. The data is sorted in descending order to highlight the most unequal organisations.
@@ -138,16 +144,18 @@ This bar chart displays the top employers in Scotland ranked by their **median g
 
 def plot_quartile_pie(df):
     st.markdown(
-    "<h3 style='text-align: center; font-size: 32px; color: #FFFFFF;'>Median Gender Balance in Top Pay Quartile (Average)</h3>",
-    unsafe_allow_html=True)
+        "<h3 style='text-align: center; font-size: 28px; color: #FFFFFF;'>Median Gender Balance in Top Pay Quartile (Average)</h3>",
+        unsafe_allow_html=True
+    )
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(5, 5))
     ax.pie([
         df['FemaleTopQuartile'].mean(),
         df['MaleTopQuartile'].mean()
-    ], labels=['Female', 'Male'], autopct='%1.1f%%', colors=['#ff9999', '#66b3ff'], startangle=90)
-    ax.set_title("Top Quartile Representation (Average %)")
+    ], labels=['Female', 'Male'], autopct='%1.1f%%', colors=['#ff9999', '#66b3ff'], startangle=90, textprops={'fontsize': 10})
+    ax.set_title("Top Quartile Representation", fontsize=12)
     st.pyplot(fig)
+
     st.markdown("""
 **Interpretation:**  
 This pie chart shows the **average proportion of male and female employees** in the **top 25% of earners** within each organisation. Men make up over 60% of top earners, highlighting a persistent imbalance in senior and high-paying roles that contributes to the overall gender pay gap.
@@ -156,14 +164,15 @@ This pie chart shows the **average proportion of male and female employees** in 
 
 def plot_boxplot(df):
     st.markdown(
-        "<h3 style='text-align: center; font-size: 32px; color: #FFFFFF;'>Median Distribution of Median Gender Pay Gaps</h3>",
+        "<h3 style='text-align: center; font-size: 28px; color: #FFFFFF;'>Median Distribution of Median Gender Pay Gaps</h3>",
         unsafe_allow_html=True
     )
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 4))
     sns.boxplot(data=df['DiffMedianHourlyPercent'], ax=ax, color="skyblue")
-    ax.set_title("Boxplot of Median Gender Pay Gaps")
-    ax.set_xlabel("Median Pay Gap (%)")
+    ax.set_title("Boxplot of Median Gender Pay Gaps", fontsize=12)
+    ax.set_xlabel("Median Pay Gap (%)", fontsize=10)
+    plt.tight_layout()
     st.pyplot(fig)
 
     st.markdown("""
@@ -174,8 +183,9 @@ The boxplot shows the **distribution and spread** of median gender pay gaps acro
 
 def plot_quartile_bars(df):
     st.markdown(
-    "<h3 style='text-align: center; font-size: 32px; color: #FFFFFF;'>Median Gender Distribution Across Pay Quartiles</h3>",
-    unsafe_allow_html=True)
+        "<h3 style='text-align: center; font-size: 28px; color: #FFFFFF;'>Median Gender Distribution Across Pay Quartiles</h3>",
+        unsafe_allow_html=True
+    )
 
     quartiles = {
         'Top': ['FemaleTopQuartile', 'MaleTopQuartile'],
@@ -183,17 +193,24 @@ def plot_quartile_bars(df):
         'Lower Middle': ['FemaleLowerMiddleQuartile', 'MaleLowerMiddleQuartile'],
         'Lower': ['FemaleLowerQuartile', 'MaleLowerQuartile']
     }
+
     data = {"Quartile": [], "Gender": [], "Average %": []}
     for label, cols in quartiles.items():
         for gender_col in cols:
             data["Quartile"].append(label)
             data["Gender"].append("Female" if "Female" in gender_col else "Male")
             data["Average %"].append(df[gender_col].mean())
+
     df_q = pd.DataFrame(data)
-    fig, ax = plt.subplots()
+
+    fig, ax = plt.subplots(figsize=(8, 5))
     sns.barplot(data=df_q, x="Quartile", y="Average %", hue="Gender", palette=["#ff9999", "#66b3ff"], ax=ax)
-    ax.set_title("Average Gender Distribution by Pay Quartile")
+    ax.set_title("Average Gender Distribution by Pay Quartile", fontsize=12)
+    ax.set_xlabel("")
+    ax.set_ylabel("Average %", fontsize=10)
+    plt.tight_layout()
     st.pyplot(fig)
+
     st.markdown("""
 **Interpretation:**  
 This chart illustrates the **average gender balance** within each pay quartile across all organisations. Men are consistently overrepresented in the top and upper-middle quartiles, while women are more prevalent in the lower ones. This suggests a structural imbalance in pay progression and promotion opportunities.
@@ -202,15 +219,19 @@ This chart illustrates the **average gender balance** within each pay quartile a
 
 def plot_heatmap(df):
     st.markdown(
-    "<h3 style='text-align: center; font-size: 32px; color: #FFFFFF;'>Median Correlation Between Key Metrics</h3>",
-    unsafe_allow_html=True)
+        "<h3 style='text-align: center; font-size: 28px; color: #FFFFFF;'>Median Correlation Between Key Metrics</h3>",
+        unsafe_allow_html=True
+    )
 
     corr_cols = [col for col in df.columns if 'Percent' in col or 'Quartile' in col]
     corr_matrix = df[corr_cols].corr()
-    fig, ax = plt.subplots(figsize=(10, 8))
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
-    ax.set_title("Correlation Heatmap of Gender Pay Metrics")
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax, annot_kws={"size": 8})
+    ax.set_title("Correlation Heatmap of Gender Pay Metrics", fontsize=12)
+    plt.tight_layout()
     st.pyplot(fig)
+
     st.markdown("""
 **Interpretation:**  
 This correlation heatmap identifies relationships between gender pay metrics. A **positive correlation between male representation in top quartiles and high pay gaps** implies that organisational leadership skewed towards men is linked to wider disparities. Strong **negative correlations** with female quartile metrics confirm the inverse relationship.
@@ -219,8 +240,9 @@ This correlation heatmap identifies relationships between gender pay metrics. A 
 
 def show_best_and_worst(df):
     st.markdown(
-        "<h3 style='text-align: center; font-size: 32px; color: #FFFFFF;'>Median Employers With Most Balanced Pay</h3>",
-        unsafe_allow_html=True)
+        "<h3 style='text-align: center; font-size: 28px; color: #FFFFFF;'>Median Employers With Most Balanced Pay</h3>",
+        unsafe_allow_html=True
+    )
 
     best = df.nsmallest(5, 'DiffMedianHourlyPercent')
     worst = df.nlargest(5, 'DiffMedianHourlyPercent')
