@@ -3,17 +3,16 @@ Analysing the Gender Pay Gap in Scotland's employment pool, Using data sourced f
 
 source: https://gender-pay-gap.service.gov.uk/
 
-# Scottish Public Sector Gender Pay Gap Analysis (2023–2024)
+# Scottish Employment Sector Gender Pay Gap Analysis (2023–2024)
 
  **Interactive Dashboard Project using Python & Streamlit**  
- **Focus: Gender Pay Disparities in Scotland’s Public Sector**
+ **Focus: Gender Pay Disparities in Scotland’s Employment Sector**
 
 ---
 
 ## 📖 Overview
 
-This self-directed project explores the **UK Government's 2023–2024 gender pay gap dataset**, focusing on **Scottish public sector employers**. It aims to deliver clear, interactive insights into disparities in hourly pay between men and women across key institutions such as local councils, NHS trusts, and government agencies.
-
+This self-directed project explores the **UK Government's 2023–2024 gender pay gap dataset**, focusing on **Scottish employers** 🏴󠁧󠁢󠁳󠁣󠁴󠁿 
 This project is part of my transition into data analytics, demonstrating my ability to handle real-world datasets, build interactive dashboards, and communicate insights effectively.
 
 ---
@@ -54,7 +53,7 @@ This project is part of my transition into data analytics, demonstrating my abil
 
 ## 💡 Why This Project Matters 🤝
 
-Gender pay disparity remains a pressing issue. By narrowing the focus to the Scottish public sector, this analysis helps highlight areas where progress is being made—and where further transparency and improvement are needed.
+Gender pay disparity remains a pressing issue. By narrowing the focus geographically to the Scottish employment sector, this analysis helps highlight areas where progress is being made—and where further transparency and improvement are needed.
 
 ---
 
