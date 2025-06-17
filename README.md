@@ -10,16 +10,16 @@ source: https://gender-pay-gap.service.gov.uk/
 
 ---
 
+## 🎛️ Dashboard Preview
+
+> 👉 **Launch App**: https://scottish-employee-pay-gap-analysis-aps6eizen4gtt5yndryyhu.streamlit.app
+
+---
+
 ## 📖 Overview
 
 This self-directed project explores the **UK Government's 2023–2024 gender pay gap dataset**, focusing on **Scottish employers** 🏴󠁧󠁢󠁳󠁣󠁴󠁿 
 This project is part of my transition into data analytics, demonstrating my ability to handle real-world datasets, build interactive dashboards, and communicate insights effectively.
-
----
-
-## 🎛️ Dashboard Preview
-
-> 👉 **Launch App**: https://scottish-employee-pay-gap-analysis-aps6eizen4gtt5yndryyhu.streamlit.app
 
 ---
 
